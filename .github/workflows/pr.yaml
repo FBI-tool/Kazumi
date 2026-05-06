@@ -95,7 +95,7 @@
 
       flutter-build-android:
         needs: [flutter-test, flutter-analyze]
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.run_android) || (github.event_name == 'pull_request' && ! github.event.pull_request.draft) }}
+        if: ${{ (github.event_name == 'pull_request' && ! github.event.pull_request.draft) || (github.event_name == 'workflow_dispatch' && (inputs.run_android || (! inputs.run_android && ! inputs.run_windows && ! inputs.run_ios && ! inputs.run_macos && ! inputs.run_linux))) }}
         name: "Release for android"
         runs-on: "ubuntu-latest"
         permissions: write-all
@@ -138,7 +138,7 @@
 
       flutter-build-windows:
         needs: [flutter-test, flutter-analyze]
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.run_windows) || (github.event_name == 'pull_request' && ! github.event.pull_request.draft) }}
+        if: ${{ (github.event_name == 'pull_request' && ! github.event.pull_request.draft) || (github.event_name == 'workflow_dispatch' && (inputs.run_windows || (! inputs.run_android && ! inputs.run_windows && ! inputs.run_ios && ! inputs.run_macos && ! inputs.run_linux))) }}
         name: "Release for windows"
         runs-on: "windows-latest"
         permissions: write-all
@@ -204,7 +204,7 @@
 
       flutter-build-ios:
         needs: [flutter-test, flutter-analyze]
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.run_ios) || (github.event_name == 'pull_request' && ! github.event.pull_request.draft) }}
+        if: ${{ (github.event_name == 'pull_request' && ! github.event.pull_request.draft) || (github.event_name == 'workflow_dispatch' && (inputs.run_ios || (! inputs.run_android && ! inputs.run_windows && ! inputs.run_ios && ! inputs.run_macos && ! inputs.run_linux))) }}
         name: "Release for iOS"
         runs-on: "macos-latest"
         permissions: write-all
@@ -235,7 +235,7 @@
 
       flutter-build-macos:
         needs: [flutter-test, flutter-analyze]
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.run_macos) || (github.event_name == 'pull_request' && ! github.event.pull_request.draft) }}
+        if: ${{ (github.event_name == 'pull_request' && ! github.event.pull_request.draft) || (github.event_name == 'workflow_dispatch' && (inputs.run_macos || (! inputs.run_android && ! inputs.run_windows && ! inputs.run_ios && ! inputs.run_macos && ! inputs.run_linux))) }}
         name: "Release for Macos"
         runs-on: "macos-latest"
         permissions: write-all
@@ -265,7 +265,7 @@
 
       flutter-build-linux:
         needs: [flutter-test, flutter-analyze]
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.run_linux) || (github.event_name == 'pull_request' && ! github.event.pull_request.draft) }}
+        if: ${{ (github.event_name == 'pull_request' && ! github.event.pull_request.draft) || (github.event_name == 'workflow_dispatch' && (inputs.run_linux || (! inputs.run_android && ! inputs.run_windows && ! inputs.run_ios && ! inputs.run_macos && ! inputs.run_linux))) }}
         name: "Release for Linux"
         runs-on: "ubuntu-latest" 
         permissions: write-all
